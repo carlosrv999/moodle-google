@@ -7,3 +7,12 @@ variable "project_id" {
   type        = string
   description = "Project ID"
 }
+
+variable "database_specs" {
+  type    = string
+  default = "db-n1-standard-2"
+}
+
+variable "home_ip_address" {
+  type = string
+}
