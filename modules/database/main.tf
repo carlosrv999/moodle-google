@@ -1,5 +1,5 @@
 resource "google_compute_global_address" "default" {
-  name          = var.private_ip_address_name
+  name          = var.private_address_name
   purpose       = "VPC_PEERING"
   address_type  = "INTERNAL"
   prefix_length = var.cidr_block_prefix_length

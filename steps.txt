@@ -1,0 +1,1 @@
+gcloud sql users set-password root --instance moodledb-01 --password=***
