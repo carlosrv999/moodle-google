@@ -16,3 +16,7 @@ variable "database_specs" {
 variable "home_ip_address" {
   type = string
 }
+
+variable "gke_node_instance_type" {
+  type = string
+}
