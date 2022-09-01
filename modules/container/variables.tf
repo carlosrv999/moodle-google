@@ -17,3 +17,7 @@ variable "project_id" {
 variable "instance_type" {
   type = string
 }
+
+variable "artifact_registry_repo_name" {
+  type = string
+}

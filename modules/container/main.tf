@@ -3,6 +3,14 @@ resource "google_service_account" "default" {
   display_name = "Service Account for GKE nodes"
 }
 
+resource "google_artifact_registry_repository_iam_member" "pull_image_permission" {
+  project    = var.project_id
+  location   = var.region
+  repository = var.artifact_registry_repo_name
+  role       = "roles/artifactregistry.reader"
+  member     = "serviceAccount:${google_service_account.default.email}"
+}
+
 resource "google_container_cluster" "default" {
   name                     = "gke-moodle-tf"
   location                 = var.region

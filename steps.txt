@@ -1,1 +1,2 @@
 gcloud sql users set-password root --instance moodledb-01 --password=***
+gcloud container clusters get-credentials gke-moodle-tf --region us-central1

@@ -20,3 +20,7 @@ variable "home_ip_address" {
 variable "gke_node_instance_type" {
   type = string
 }
+
+variable "artifact_registry_repo_name" {
+  type = string
+}
