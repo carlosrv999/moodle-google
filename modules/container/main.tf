@@ -3,6 +3,15 @@ resource "google_service_account" "default" {
   display_name = "Service Account for GKE nodes"
 }
 
+resource "google_project_iam_binding" "default" {
+  project = var.project_id
+  role    = "roles/logging.logWriter"
+
+  members = [
+    "serviceAccount:${google_service_account.default.email}",
+  ]
+}
+
 resource "google_artifact_registry_repository_iam_member" "pull_image_permission" {
   project    = var.project_id
   location   = var.region
