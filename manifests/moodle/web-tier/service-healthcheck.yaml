@@ -1,6 +1,7 @@
 apiVersion: v1
 kind: Service
 metadata:
+  namespace: moodle
   name: moodle
   annotations:
     cloud.google.com/neg: '{"ingress": true}'
@@ -20,6 +21,7 @@ spec:
 apiVersion: cloud.google.com/v1
 kind: BackendConfig
 metadata:
+  namespace: moodle
   name: my-backendconfig
 spec:
   healthCheck:

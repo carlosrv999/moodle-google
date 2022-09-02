@@ -1,6 +1,7 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
+  namespace: moodle
   name: ingress-moodle
   annotations:
     kubernetes.io/ingress.class: "gce"
