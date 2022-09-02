@@ -1,0 +1,21 @@
+---
+resources:
+  - ../../web-tier
+images:
+  - name: moodle-sample
+    newName: us-central1-docker.pkg.dev/agile-terra-359116/moodle/moodle-sample
+    newTag: v2
+configMapGenerator:
+  - name: nginx-config
+    namespace: moodle
+    files:
+      - default.conf=serverconfig/default.conf
+  - name: php-ini
+    namespace: moodle
+    files:
+      - php.ini=serverconfig/php.ini
+secretGenerator:
+  - name: config-php
+    namespace: moodle
+    files:
+      - config.php=serverconfig/config.php

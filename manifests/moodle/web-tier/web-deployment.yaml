@@ -19,7 +19,7 @@ spec:
         tier: frontend
     spec:
       containers:
-        - image: us-central1-docker.pkg.dev/agile-terra-359116/moodle/moodle-sample:v2
+        - image: moodle-sample:latest
           imagePullPolicy: Always
           name: php-fpm
           volumeMounts:

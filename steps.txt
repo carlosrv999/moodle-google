@@ -14,3 +14,4 @@ gcloud compute ssh --zone=us-central1-a restoresql
 4.  mysql -h (private_ip) -u moodleuser -p(db_password) < initdb.sql
     mysql -h 10.100.128.13 -u moodleuser -p(db_password) moodle < moodle-database.sql
 
+5.  kubectl create namespace moodle

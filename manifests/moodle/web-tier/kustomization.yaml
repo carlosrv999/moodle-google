@@ -1,0 +1,5 @@
+---
+resources:
+  - gce-ingress.yaml
+  - service-healthcheck.yaml
+  - web-deployment.yaml
