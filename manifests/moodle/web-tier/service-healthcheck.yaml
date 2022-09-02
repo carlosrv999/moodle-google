@@ -13,7 +13,8 @@ spec:
       protocol: TCP
       targetPort: 80
   selector:
-    app: nginx
+    app: moodle
+    tier: frontend
   sessionAffinity: None
   type: ClusterIP
 

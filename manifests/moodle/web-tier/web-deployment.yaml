@@ -2,18 +2,21 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   namespace: moodle
-  name: nginx-deployment
+  name: moodle
   labels:
-    app: nginx
+    app: moodle
+    tier: frontend
 spec:
   replicas: 3
   selector:
     matchLabels:
-      app: nginx
+      app: moodle
+      tier: frontend
   template:
     metadata:
       labels:
-        app: nginx
+        app: moodle
+        tier: frontend
     spec:
       containers:
         - image: us-central1-docker.pkg.dev/agile-terra-359116/moodle/moodle-sample:v2
