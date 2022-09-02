@@ -24,3 +24,8 @@ variable "gke_node_instance_type" {
 variable "artifact_registry_repo_name" {
   type = string
 }
+
+variable "db_password" {
+  type      = string
+  sensitive = true
+}
