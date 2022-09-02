@@ -1,2 +1,16 @@
-gcloud sql users set-password root --instance moodledb-01 --password=***
 gcloud container clusters get-credentials gke-moodle-tf --region us-central1
+
+RESTORE DATABASE:
+
+1. ssh to instance:
+
+gcloud compute ssh --zone=us-central1-a restoresql
+
+2. git clone https://github.com/carlosrv999/moodle-google.git
+
+3.  sudo apt update 
+    sudo apt install -y mysql-client unzip
+
+4.  mysql -h (private_ip) -u moodleuser -p(db_password) < initdb.sql
+    mysql -h 10.100.128.13 -u moodleuser -p(db_password) moodle < moodle-database.sql
+

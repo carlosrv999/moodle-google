@@ -1,0 +1,72 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-deployment
+  labels:
+    app: nginx
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+        - image: us-central1-docker.pkg.dev/agile-terra-359116/moodle/moodle-sample:v2
+          imagePullPolicy: Always
+          name: php-fpm
+          volumeMounts:
+            - name: web-root
+              mountPath: /var/www/html
+            - name: config-php
+              mountPath: /var/www/html/config.php
+              subPath: config.php
+            - name: php-ini
+              mountPath: /usr/local/etc/php/php.ini
+              subPath: php.ini
+          lifecycle:
+            postStart:
+              exec:
+                command:
+                  - "/bin/sh"
+                  - "-c"
+                  - |
+                    cp -rp /app/. /var/www/html
+        #                chmod -R 0755 /var/www/html
+        - image: nginx:stable-alpine
+          name: nginx-sidecar
+          ports:
+            - name: web
+              containerPort: 80
+              protocol: TCP
+          volumeMounts:
+            - mountPath: /etc/nginx/conf.d
+              name: nginx-conf
+            - name: web-root
+              mountPath: /var/www/html
+              readOnly: true
+      volumes:
+        - name: nginx-conf
+          configMap:
+            name: nginx-config
+            items:
+              - key: default.conf
+                path: default.conf
+        - name: web-root
+          emptyDir: {}
+        - name: config-php
+          secret:
+            secretName: config-php
+            defaultMode: 0755
+            items:
+              - key: config.php
+                path: config.php
+        - name: php-ini
+          configMap:
+            name: php-ini
+            items:
+              - key: php.ini
+                path: php.ini
