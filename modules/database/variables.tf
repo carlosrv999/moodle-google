@@ -34,3 +34,8 @@ variable "home_ip_address" {
 variable "instance_specs" {
   type = string
 }
+
+variable "db_password" {
+  type      = string
+  sensitive = true
+}
