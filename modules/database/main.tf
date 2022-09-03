@@ -57,14 +57,14 @@ resource "google_sql_database_instance" "default" {
 }
 
 resource "google_sql_database" "moodle" {
-  name      = "moodle"
+  name      = var.db_name
   instance  = google_sql_database_instance.default.name
   charset   = "utf8mb4"
   collation = "utf8mb4_unicode_ci"
 }
 
 resource "google_sql_user" "moodle" {
-  name     = "moodleuser"
+  name     = var.db_user
   instance = google_sql_database_instance.default.name
   password = var.db_password
   type     = "BUILT_IN"
