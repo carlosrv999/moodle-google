@@ -16,3 +16,5 @@ After that, deploy kubernetes application using:
 ```
 kubectl apply -k manifests/overlays/development
 ```
+
+From ```terraform output```, open https://${loadbalancer_ip_address}, login with credentials admin:P@ssw0rd123#$
