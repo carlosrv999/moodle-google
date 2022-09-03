@@ -9,7 +9,7 @@ $CFG->dblibrary = 'native';
 $CFG->dbhost    = '10.100.128.19';
 $CFG->dbname    = 'moodle';
 $CFG->dbuser    = 'moodleuser';
-$CFG->dbpass    = 'KreBq6H#cMqOTrdL0!';
+$CFG->dbpass    = 'PASSWORD';
 $CFG->prefix    = 'mdl_';
 $CFG->dboptions = array (
   'dbpersist' => 0,
@@ -18,7 +18,7 @@ $CFG->dboptions = array (
   'dbcollation' => 'utf8mb4_unicode_ci',
 );
 
-$CFG->wwwroot   = 'http://34.149.75.45';
+$CFG->wwwroot   = 'http://Public_IP';
 $CFG->dataroot  = '/var/moodledata';
 $CFG->admin     = 'admin';
 

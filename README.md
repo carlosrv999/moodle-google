@@ -1,12 +1,30 @@
 # Moodle Google - Run Moodle on Google Cloud Kubernetes Engine
 
+## Requirements
+
+1. terraform 1.2.8+
+2. kubectl 1.22+
+3. gcloud cli
+4. Google Cloud Account access
+5. Enable Google APIs (gcloud services enable):
+    - artifactregistry.googleapis.com
+    - container.googleapis.com
+    - file.googleapis.com
+    - sqladmin.googleapis.com
+    - servicenetworking.googleapis.com
+    - compute.googleapis.com
+    - iam.googleapis.com
+
 ## How to deploy this project
+
+Build the image from this [repository](https://github.com/carlosrv999/moodle-basic)
+Push to Artifact Registry and pass <em>image_name</em> and <em>image_tag</em> to Terraform variable, then:
+
 ```
 terraform init
 terraform plan
 terraform apply
 ```
-
 Then initialize kubeconfig file with:
 ```
 gcloud container clusters get-credentials gke-moodle-tf --region us-central1
