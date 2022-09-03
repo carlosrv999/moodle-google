@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+
+apt update
+apt install -y mysql-client unzip nfs-common
+
+git clone https://github.com/carlosrv999/moodle-google.git /opt/moodle-google
+
+unzip /opt/moodle-google/db.zip -d /opt/moodle-google
+
+mysql -h ${database_ip} -u ${db_user} -p${database_passwd} < /opt/moodle-google/initdb.sql
+mysql -h ${database_ip} -u ${db_user} -p${database_passwd} ${db_name} < /opt/moodle-google/moodle-database.sql
+
+mkdir /var/moodledata
+mount ${filestore_ip}:/moodledata /var/moodledata
+rm -rf /var/moodledata/*
+chmod -R 777 /var/moodledata

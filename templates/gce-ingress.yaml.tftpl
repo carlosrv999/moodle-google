@@ -1,0 +1,14 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  namespace: moodle
+  name: ingress-moodle
+  annotations:
+    kubernetes.io/ingress.class: "gce"
+    kubernetes.io/ingress.global-static-ip-name: ${loadbalancer_ip_name}
+spec:
+  defaultBackend:
+    service:
+      name: moodle
+      port:
+        number: 80
