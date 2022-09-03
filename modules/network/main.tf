@@ -36,3 +36,8 @@ resource "google_compute_subnetwork" "private" {
     metadata             = "INCLUDE_ALL_METADATA"
   }
 }
+
+resource "google_compute_global_address" "default" {
+  name         = "global-loadbalancer-ip"
+  address_type = "EXTERNAL"
+}

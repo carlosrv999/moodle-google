@@ -3,7 +3,7 @@ output "mysql_public_ip_address" {
 }
 
 output "load_balancer_ip" {
-  value = google_compute_global_address.default.address
+  value = module.network.loadbalancer_ip_address
 }
 
 output "filestore_private_ip" {

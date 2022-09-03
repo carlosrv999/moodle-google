@@ -75,7 +75,7 @@ resource "google_compute_instance" "db_restore_instance" {
     }
   }
 
-  metadata_startup_script = templatefile("script.tftpl", {
+  metadata_startup_script = templatefile("${path.module}/templates/initialize_moodle.tftpl", {
     database_ip     = module.database.private_ip_address,
     db_user         = var.db_user,
     database_passwd = var.db_password,
@@ -103,7 +103,53 @@ resource "google_compute_firewall" "default" {
   target_tags   = ["ssh"]
 }
 
-resource "google_compute_global_address" "default" {
-  name         = "global-loadbalancer-ip"
-  address_type = "EXTERNAL"
+resource "local_file" "update_config_php" {
+
+  content = templatefile("${path.module}/templates/config.php.tftpl", {
+    db_private_ip   = module.database.private_ip_address,
+    db_name         = var.db_name,
+    db_user         = var.db_user,
+    db_password     = var.db_password,
+    loadbalancer_ip = module.network.loadbalancer_ip_address,
+  })
+
+  filename = "${path.module}/manifests/overlays/development/serverconfig/config.php"
+
+  depends_on = [
+    module.database,
+    module.network,
+  ]
+
+}
+
+resource "local_file" "kustomization_yaml" {
+
+  content = templatefile("${path.module}/templates/kustomization.yaml.tftpl", {
+    image_name = var.image_name,
+    image_tag  = var.image_tag,
+  })
+
+  filename = "${path.module}/manifests/overlays/development/kustomization.yaml"
+
+}
+
+resource "local_file" "pv_moodledata_yaml" {
+
+  content = templatefile("${path.module}/templates/pv-moodledata.yaml.tftpl", {
+    file_share_name      = module.filestore.file_share_name,
+    filestore_private_ip = module.filestore.filestore_private_ip,
+  })
+
+  filename = "${path.module}/manifests/base/tier-sharedfiles/pv-moodledata.yaml"
+
+}
+
+resource "local_file" "gce_ingress_yaml" {
+
+  content = templatefile("${path.module}/templates/gce-ingress.yaml.tftpl", {
+    loadbalancer_ip_name = module.network.loadbalancer_ip_name,
+  })
+
+  filename = "${path.module}/manifests/base/tier-web/gce-ingress.yaml"
+
 }

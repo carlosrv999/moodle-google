@@ -13,3 +13,11 @@ output "public_subnets_names" {
 output "private_subnets_names" {
   value = google_compute_subnetwork.private[*].name
 }
+
+output "loadbalancer_ip_name" {
+  value = google_compute_global_address.default.name
+}
+
+output "loadbalancer_ip_address" {
+  value = google_compute_global_address.default.address
+}
