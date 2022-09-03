@@ -31,6 +31,8 @@ spec:
             - name: php-ini
               mountPath: /usr/local/etc/php/php.ini
               subPath: php.ini
+            - name: moodledata
+              mountPath: /var/moodledata
           lifecycle:
             postStart:
               exec:
@@ -74,3 +76,7 @@ spec:
             items:
               - key: php.ini
                 path: php.ini
+        - name: moodledata
+          persistentVolumeClaim:
+            claimName: fileserver-claim
+            readOnly: false

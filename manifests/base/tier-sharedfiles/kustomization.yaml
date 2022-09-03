@@ -1,0 +1,4 @@
+---
+resources:
+  - pv-moodledata.yaml
+  - pvc-moodledata.yaml

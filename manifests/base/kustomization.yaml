@@ -1,0 +1,5 @@
+---
+resources:
+  - ./tier-web
+  - ./tier-sharedfiles
+  - ./tier-cache

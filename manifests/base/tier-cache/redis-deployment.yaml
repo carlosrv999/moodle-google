@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: moodle
+  name: redis
+  labels:
+    app: moodle
+    tier: cache
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: moodle
+      tier: cache
+  template:
+    metadata:
+      labels:
+        app: moodle
+        tier: cache
+    spec:
+      containers:
+        - image: redis:5.0-alpine
+          imagePullPolicy: Always
+          name: redis
