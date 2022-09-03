@@ -20,13 +20,14 @@ module "database" {
   cidr_block_prefix_length = 20
   database_version         = "MYSQL_8_0"
   home_ip_address          = var.home_ip_address
-  #compute_instance_ip = google_compute_instance.db_restore_instance.network_interface[0].network_ip
-  instance_name        = "moodledb-06"
-  network_id           = module.network.network_id
-  instance_specs       = var.database_specs
-  private_address_name = "global-address-moodledb"
-  region               = var.region
-  db_password          = var.db_password
+  instance_name            = "moodledb-08"
+  network_id               = module.network.network_id
+  instance_specs           = var.database_specs
+  private_address_name     = "global-address-moodledb"
+  region                   = var.region
+  db_password              = var.db_password
+  db_name                  = var.db_name
+  db_user                  = var.db_user
 }
 
 module "container" {
@@ -38,6 +39,19 @@ module "container" {
   project_id                  = var.project_id
   instance_type               = var.gke_node_instance_type
   artifact_registry_repo_name = var.artifact_registry_repo_name
+}
+
+module "filestore" {
+  source = "./modules/filestore"
+
+  fileshare_name = "moodledata"
+  network_name   = module.network.network_name
+  region         = var.region
+  project_id     = var.project_id
+
+  depends_on = [
+    module.database
+  ]
 }
 
 resource "google_compute_instance" "db_restore_instance" {
@@ -60,6 +74,14 @@ resource "google_compute_instance" "db_restore_instance" {
     access_config {
     }
   }
+
+  metadata_startup_script = templatefile("script.tftpl", {
+    database_ip     = module.database.private_ip_address,
+    db_user         = var.db_user,
+    database_passwd = var.db_password,
+    filestore_ip    = module.filestore.filestore_private_ip,
+    db_name         = var.db_name
+  })
 
   tags = ["ssh"]
 
