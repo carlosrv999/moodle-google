@@ -1,22 +1,9 @@
 gcloud container clusters get-credentials gke-moodle-tf --region us-central1
-
-RESTORE DATABASE:
-
-1. ssh to instance:
-
-gcloud compute ssh --zone=us-central1-a restoresql
-
-2. git clone https://github.com/carlosrv999/moodle-google.git
-
-3.  sudo apt update 
-    sudo apt install -y mysql-client unzip nfs-common
-
-4.  mysql -h 10.100.128.15 -u moodleuser -pKreBq6H#cMqOTrdL0! < initdb.sql
-    mysql -h 10.100.128.15 -u moodleuser -pKreBq6H#cMqOTrdL0! moodle < moodle-database.sql
-
-5.  kubectl create namespace moodle
-
-6.  sudo mkdir /var/moodledata
-    sudo mount 10.100.129.2:/moodledata /var/moodledata
-    sudo chown -R www-data /var/moodledata
-    sudo chmod -R 777 /var/moodledata
+enable apis:
+compute engine
+logging
+filestore
+cloudsql
+kubernetes engine
+servicenetworking
+iam

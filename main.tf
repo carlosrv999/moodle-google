@@ -20,7 +20,7 @@ module "database" {
   cidr_block_prefix_length = 20
   database_version         = "MYSQL_8_0"
   home_ip_address          = var.home_ip_address
-  instance_name            = "moodledb-08"
+  instance_name            = "moodledb-13"
   network_id               = module.network.network_id
   instance_specs           = var.database_specs
   private_address_name     = "global-address-moodledb"
