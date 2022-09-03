@@ -1,15 +1,15 @@
 module "network" {
   source = "./modules/network"
 
-  network_name = "vpc-notesapp"
+  network_name = "vpc-moodle"
   public_subnets = [
     "10.100.0.0/21",
   ]
   private_subnets = [
     "10.100.8.0/21",
   ]
-  public_subnet_suffix  = "public-project-notesapp"
-  private_subnet_suffix = "private-project-notesapp"
+  public_subnet_suffix  = "public-project-moodle"
+  private_subnet_suffix = "private-project-moodle"
   region                = var.region
 }
 
