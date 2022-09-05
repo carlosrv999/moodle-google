@@ -14,4 +14,5 @@ mysql -h ${database_ip} -u ${db_user} -p${database_passwd} ${db_name} < /opt/moo
 mkdir /var/moodledata
 mount ${filestore_ip}:/moodledata /var/moodledata
 rm -rf /var/moodledata/*
+cp -r /opt/moodle-google/moodledata/* /var/moodledata
 chmod -R 777 /var/moodledata
