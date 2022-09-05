@@ -8,12 +8,11 @@
 4. Google Cloud Account access
 5. Enable Google APIs (gcloud services enable):
     - artifactregistry.googleapis.com
+    - compute.googleapis.com
     - container.googleapis.com
+    - servicenetworking.googleapis.com
     - file.googleapis.com
     - sqladmin.googleapis.com
-    - servicenetworking.googleapis.com
-    - compute.googleapis.com
-    - iam.googleapis.com
 
 ## How to deploy this project
 
@@ -25,14 +24,15 @@ terraform init
 terraform plan
 terraform apply
 ```
-Then initialize kubeconfig file with:
+Initialize kubectl access with:
 ```
 gcloud container clusters get-credentials gke-moodle-tf --region us-central1
 ```
 
 After that, deploy kubernetes application using:
 ```
+kubectl create namespace moodle
 kubectl apply -k manifests/overlays/development
 ```
 
-From ```terraform output```, open https://${loadbalancer_ip_address}, login with credentials admin:P@ssw0rd123#$
+From ```terraform output```, open http://${loadbalancer_ip_address}, login with credentials admin:P@ssw0rd123#$

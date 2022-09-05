@@ -15,7 +15,8 @@ variable "project_id" {
 }
 
 variable "instance_type" {
-  type = string
+  type    = string
+  default = "n2-standard-2"
 }
 
 variable "artifact_registry_repo_name" {

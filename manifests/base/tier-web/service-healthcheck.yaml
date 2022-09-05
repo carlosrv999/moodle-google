@@ -31,5 +31,5 @@ spec:
     healthyThreshold: 1
     unhealthyThreshold: 2
     type: HTTP
-    requestPath: /README.txt
+    requestPath: /README.md
     port: 80
