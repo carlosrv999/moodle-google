@@ -41,7 +41,7 @@ From ```terraform output```, open http://${loadbalancer_ip_address}, login with 
 
 You can modify contents of [manifests/overlays/development/serverconfig](manifests/overlays/development/serverconfig) to your requirements, if you like, however, default values are recommended.
 
-- [default.conf](manifests/overlays/development/serverconfig/default.conf): nginx virtual server configuration.
+- [default.conf](manifests/overlays/development/serverconfig/default.conf): nginx server block configuration.
 - [php.ini](manifests/overlays/development/serverconfig/php.ini): default configuration for PHP.
 - [www.conf](manifests/overlays/development/serverconfig/www.conf): default pool directives for PHP-FPM.
 
