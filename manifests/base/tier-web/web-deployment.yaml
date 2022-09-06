@@ -31,6 +31,9 @@ spec:
             - name: php-ini
               mountPath: /usr/local/etc/php/php.ini
               subPath: php.ini
+            - name: www-conf
+              mountPath: /usr/local/etc/php-fpm.d/www.conf
+              subPath: www.conf
             - name: moodledata
               mountPath: /var/moodledata
           lifecycle:
@@ -41,7 +44,6 @@ spec:
                   - "-c"
                   - |
                     cp -rp /app/. /var/www/html
-        #                chmod -R 0755 /var/www/html
         - image: nginx:stable-alpine
           name: nginx-sidecar
           ports:
@@ -76,6 +78,12 @@ spec:
             items:
               - key: php.ini
                 path: php.ini
+        - name: www-conf
+          configMap:
+            name: www-conf
+            items:
+              - key: www.conf
+                path: www.conf
         - name: moodledata
           persistentVolumeClaim:
             claimName: fileserver-claim

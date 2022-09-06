@@ -4,16 +4,16 @@ resources:
   - ../../base
 configMapGenerator:
   - name: nginx-config
-    namespace: moodle
     files:
       - default.conf=serverconfig/default.conf
   - name: php-ini
-    namespace: moodle
     files:
       - php.ini=serverconfig/php.ini
+  - name: www-conf
+    files:
+      - www.conf=serverconfig/www.conf
 secretGenerator:
   - name: config-php
-    namespace: moodle
     files:
       - config.php=serverconfig/config.php
 images:
