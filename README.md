@@ -35,7 +35,17 @@ kubectl create namespace moodle
 kubectl apply -k manifests/overlays/development
 ```
 
-From ```terraform output```, open http://${loadbalancer_ip_address}, login with credentials admin:P@ssw0rd123#$
+Reset password:
+
+```
+kubectl -n moodle get pods      # select one of the pods "moodle-xxx"
+kubectl -n moodle exec -ti (pod_name) -c php-fpm -- \
+	php /var/www/html/admin/cli/reset_password.php \
+	--username=admin \
+	--password=***<new_password>*** \
+	--ignore-password-policy
+```
+From ```terraform output```, open http://${loadbalancer_ip_address}, login with credentials admin:new_password
 
 ## Tuning server configuration
 
