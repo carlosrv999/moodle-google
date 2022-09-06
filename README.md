@@ -37,15 +37,16 @@ kubectl apply -k manifests/overlays/development
 
 Reset password:
 
-```
+<pre>
 kubectl -n moodle get pods      # select one of the pods "moodle-xxx"
-kubectl -n moodle exec -ti (pod_name) -c php-fpm -- \
+kubectl -n moodle exec -ti <i><b>(pod_name)</b></i> -c php-fpm -- \
 	php /var/www/html/admin/cli/reset_password.php \
 	--username=admin \
-	--password=***<new_password>*** \
+	--password=<i><b>(new_password)</b></i> \
 	--ignore-password-policy
-```
-From ```terraform output```, open http://${loadbalancer_ip_address}, login with credentials admin:new_password
+</pre>
+From ```terraform output```, open http://**${loadbalancer_ip_address}**, login with credentials admin:**new_password**
+(Provisioning of Load Balancer can take up to 10 minutes)
 
 ## Tuning server configuration
 
