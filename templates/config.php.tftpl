@@ -18,9 +18,10 @@ $CFG->dboptions = array (
   'dbcollation' => 'utf8mb4_unicode_ci',
 );
 
-$CFG->wwwroot   = 'http://${loadbalancer_ip}';
-$CFG->dataroot  = '/var/moodledata';
-$CFG->admin     = 'admin';
+$CFG->wwwroot       = 'http://${loadbalancer_ip}';
+$CFG->dataroot      = '/var/moodledata';
+$CFG->localcachedir = '/var/local/cache';
+$CFG->admin         = 'admin';
 
 $CFG->directorypermissions = 0777;
 
