@@ -35,7 +35,7 @@ kubectl create namespace moodle
 kubectl apply -k manifests/overlays/development
 ```
 
-Reset password:
+Reset <b>admin</b> password:
 
 <pre>
 kubectl -n moodle get pods      # select one of the pods "moodle-xxx"
