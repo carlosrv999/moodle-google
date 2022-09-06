@@ -48,6 +48,7 @@ module "filestore" {
   network_name   = module.network.network_name
   region         = var.region
   project_id     = var.project_id
+  # tier           = "BASIC_SSD"
 
   depends_on = [
     module.database
