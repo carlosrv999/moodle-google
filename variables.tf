@@ -13,10 +13,6 @@ variable "database_specs" {
   default = "db-n1-standard-2"
 }
 
-variable "home_ip_address" {
-  type = string
-}
-
 variable "gke_node_instance_type" {
   type = string
 }

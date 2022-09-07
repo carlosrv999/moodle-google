@@ -31,13 +31,7 @@ resource "google_sql_database_instance" "default" {
     disk_type         = "PD_SSD"
 
     ip_configuration {
-      ipv4_enabled    = true
       private_network = var.network_id
-
-      authorized_networks {
-        name  = "my-home"
-        value = var.home_ip_address
-      }
     }
 
     backup_configuration {

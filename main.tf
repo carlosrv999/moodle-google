@@ -19,8 +19,7 @@ module "database" {
   cidr_block               = "10.100.128.0"
   cidr_block_prefix_length = 20
   database_version         = "MYSQL_8_0"
-  home_ip_address          = var.home_ip_address
-  instance_name            = "moodledb-13"
+  instance_name            = "moodledb-22"
   network_id               = module.network.network_id
   instance_specs           = var.database_specs
   private_address_name     = "global-address-moodledb"
@@ -100,7 +99,7 @@ resource "google_compute_firewall" "default" {
     ports    = ["22"]
   }
 
-  source_ranges = [var.home_ip_address]
+  source_ranges = ["0.0.0.0/0"]
   target_tags   = ["ssh"]
 }
 
@@ -150,7 +149,5 @@ resource "local_file" "gce_ingress_yaml" {
   content = templatefile("${path.module}/templates/gce-ingress.yaml.tftpl", {
     loadbalancer_ip_name = module.network.loadbalancer_ip_name,
   })
-
   filename = "${path.module}/manifests/base/tier-web/gce-ingress.yaml"
-
 }
